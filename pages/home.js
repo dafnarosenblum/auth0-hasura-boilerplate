@@ -5,8 +5,10 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { AuthContextProvider } from "../context/AuthContext";
 import Main from "../components/Main";
+import { useAuth } from "use-auth0-hooks";
 
 const Home = () => {
+  const { logout } = useAuth();
   return (
     <AuthContextProvider>
       <AppBar position="fixed">
