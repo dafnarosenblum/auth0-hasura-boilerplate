@@ -1,6 +1,11 @@
 import App from "next/app";
 import Router from "next/router";
 import { Auth0Provider } from "use-auth0-hooks";
+import withApolloClient from "../lib/with-apollo-client";
+import { ApolloProvider } from "react-apollo";
+import fetch from "isomorphic-unfetch";
+
+fetch(process.env.HASURA_GRAPHQL_ENGINE_HOSTNAME); // wake up that darn instance!
 
 const onRedirectCallback = appState => {
   if (appState && appState.returnTo) {
@@ -42,10 +47,12 @@ class Root extends App {
         onRedirecting={onRedirecting}
         onRedirectCallback={onRedirectCallback}
       >
-        <Component {...pageProps} />
+        <ApolloProvider client={apolloClient}>
+          <Component {...pageProps} />
+        </ApolloProvider>
       </Auth0Provider>
     );
   }
 }
 
-export default Root;
+export default withApolloClient(Root);
