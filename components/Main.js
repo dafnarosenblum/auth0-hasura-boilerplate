@@ -17,9 +17,8 @@ export default function Main() {
       {isLoading
         ? "Loading..."
         : `authUser.user.permissions["x-hasura-user-id"]: ${
-            authUser ? authUser.firstName : ""
+            authUser ? authUser.permissions.id : ""
           }`}
-      {/* {authUser.user.permissions["x-hasura-user-id"]} */}
     </div>
   );
 }

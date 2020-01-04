@@ -7,7 +7,19 @@ export const AuthContext = React.createContext({
 
 export const AuthContextProvider = props => {
   const setAuthUser = authUser => {
-    setState({ ...state, authUser: { firstName: authUser.given_name } });
+    setState({
+      ...state,
+      authUser: {
+        firstName: authUser.given_name,
+        lastName: authUser.family_name,
+        picture: authUser.picture,
+        permissions: {
+          role:
+            authUser["https://hasura.io/jwt/claims"]["x-hasura-default-role"],
+          id: authUser["https://hasura.io/jwt/claims"]["x-hasura-user-id"]
+        }
+      }
+    });
   };
 
   const initState = {
