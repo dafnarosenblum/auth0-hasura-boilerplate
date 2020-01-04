@@ -8,7 +8,7 @@ export default function Main() {
 
   useEffect(() => {
     if (user && !authUser) {
-      setAuthUser(user.given_name);
+      setAuthUser(user);
     }
   });
 
@@ -16,7 +16,9 @@ export default function Main() {
     <div style={{ marginTop: "5rem" }}>
       {isLoading
         ? "Loading..."
-        : `authUser.user.permissions["x-hasura-user-id"]: ${authUser}`}
+        : `authUser.user.permissions["x-hasura-user-id"]: ${
+            authUser ? authUser.firstName : ""
+          }`}
       {/* {authUser.user.permissions["x-hasura-user-id"]} */}
     </div>
   );

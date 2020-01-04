@@ -7,7 +7,7 @@ export const AuthContext = React.createContext({
 
 export const AuthContextProvider = props => {
   const setAuthUser = authUser => {
-    setState({ ...state, authUser: authUser });
+    setState({ ...state, authUser: { firstName: authUser.given_name } });
   };
 
   const initState = {
