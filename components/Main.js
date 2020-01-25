@@ -1,24 +1,20 @@
-import React, { useContext, useEffect } from "react";
-import { AuthContext } from "../context/AuthContext";
-import { useAuth } from "use-auth0-hooks";
+import React from "react";
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+
+const GET_ABOUT_ME = gql`
+  query aboutme {
+    about_me {
+      text
+    }
+  }
+`;
 
 export default function Main() {
-  const { authUser, setAuthUser } = useContext(AuthContext);
-  const { user, isLoading } = useAuth();
-
-  useEffect(() => {
-    if (user && !authUser) {
-      setAuthUser(user);
-    }
-  });
-
+  const { loading, error, data } = useQuery(GET_ABOUT_ME);
   return (
     <div style={{ marginTop: "5rem" }}>
-      {isLoading
-        ? "Loading..."
-        : `authUser.user.permissions["x-hasura-user-id"]: ${
-            authUser ? authUser.permissions.id : ""
-          }`}
+      {loading ? "Loading.." : data["about_me"][0]["text"]}
     </div>
   );
 }

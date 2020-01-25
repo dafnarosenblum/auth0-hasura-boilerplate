@@ -8,7 +8,12 @@ import Main from "../components/Main";
 import { useAuth } from "use-auth0-hooks";
 
 const Home = () => {
-  const { logout } = useAuth();
+  const { logout, token } = useAuth({ audience: "" });
+
+  if(token){
+    
+  localStorage.setItem('token', token.idToken);
+  }
   return (
     <AuthContextProvider>
       <AppBar position="fixed">
