@@ -10,10 +10,15 @@ import { useAuth } from "use-auth0-hooks";
 const Home = () => {
   const { logout, token } = useAuth({ audience: "" });
 
-  if(token){
-    
-  localStorage.setItem('token', token.idToken);
+  if (token) {
+    localStorage.setItem("token", token.idToken);
   }
+
+  const handleClick = () => {
+    localStorage.removeItem("token");
+    logout({ returnTo: "http://localhost:3000" });
+  };
+
   return (
     <AuthContextProvider>
       <AppBar position="fixed">
@@ -21,10 +26,7 @@ const Home = () => {
           <Typography variant="h6" style={{ flexGrow: "1" }}>
             Yo!
           </Typography>
-          <Button
-            color="inherit"
-            onClick={() => logout({ returnTo: "http://localhost:3000" })}
-          >
+          <Button color="inherit" onClick={handleClick}>
             Logout
           </Button>
         </Toolbar>
