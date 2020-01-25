@@ -23,7 +23,12 @@ const Index = () => {
           </Typography>
           <Button
             color="inherit"
-            onClick={() => login({ returnTo: "http://localhost:3000/home" })}
+            onClick={() =>
+              login({
+                returnTo: "http://localhost:3000/home",
+                connection: "linkedin"
+              })
+            }
           >
             Login
           </Button>
